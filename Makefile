@@ -30,7 +30,7 @@ publish: ## Publish new release to GitHub
 	git status --short
 	test -z "$$(git status --porcelain)" && exit $?
 	make tar zip
-	cd $(BUILD_DIR) && gh release create "$(RELEASE)" "$(ASSET).tar.gz#Release (tar.gz)" "$(ASSET).zip#Release (zip)"
+	cd $(BUILD_DIR) && gh release create "$(RELEASE)" -F $(CURRENT_DIR)CHANGELOG.md "$(ASSET).tar.gz#Release (tar.gz)" "$(ASSET).zip#Release (zip)"
 	make clean
 
 clean: ## Clean
