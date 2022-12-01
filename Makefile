@@ -1,4 +1,4 @@
-.PHONY: help publish
+.PHONY: help clean publish version
 .DEFAULT := help
 
 MAKEFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -13,5 +13,19 @@ help:
 
 ##@ Development
 
-publish: ## Publish new release to GitHub
-	echo 123
+version: ## Display current version
+	git describe --tags --candidates=0
+
+targz: clean ## Make .TAR.GZ
+	tar -czvf release.tar.gz -C src .
+
+zip: clean ## Make .ZIP
+
+
+publish: clean version targz ## Publish new release to GitHub
+	gh release create "$$(git describe --tags --candidates=0)" release.tar.gz
+
+clean: ## Clean
+	rm -rfv release.tar.gz release.zip
+	git status
+	test -z "$$(git status --porcelain)" && exit $?
