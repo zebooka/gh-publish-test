@@ -26,4 +26,4 @@ publish: ## Publish new release to GitHub
 
 clean: ## Clean
 	test -d $(BUILD_DIR) || mkdir -p $(BUILD_DIR)
-	cd $(BUILD_DIR) && rm -rfv $(ASSET).CHANGELOG.md $(ASSET).tar.gz $(ASSET).zip
+	rm -rfv cd $(BUILD_DIR)/*.CHANGELOG.md $(BUILD_DIR)/*.tar.gz $(BUILD_DIR)/*.zip
