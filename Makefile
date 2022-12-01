@@ -22,10 +22,11 @@ targz: clean ## Make .TAR.GZ
 zip: clean ## Make .ZIP
 
 
-publish: clean version targz ## Publish new release to GitHub
+publish: ## Publish new release to GitHub
+	git status --short
+	test -z "$$(git status --porcelain)" && exit $?
+	make targz zip
 	gh release create "$$(git describe --tags --candidates=0)" release.tar.gz
 
 clean: ## Clean
 	rm -rfv release.tar.gz release.zip
-	git status
-	test -z "$$(git status --porcelain)" && exit $?
