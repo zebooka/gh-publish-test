@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.2.1
+
+Lets test plain text release notes.
+
+* With some of points.
+* We have done.
+
 ## v0.1.5
 
 * Changelog parsing added
