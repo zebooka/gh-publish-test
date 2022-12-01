@@ -23,7 +23,6 @@ publish: ## Publish new release to GitHub
 	tar -czvf $(BUILD_DIR)/$(ASSET).tar.gz -C src . -C .. Makefile
 	cd $(CURRENT_DIR)src && zip -r $(BUILD_DIR)/$(ASSET).zip . && cd $(CURRENT_DIR) && zip -r $(BUILD_DIR)/$(ASSET).zip Makefile
 	cd $(BUILD_DIR) && gh release create "$(RELEASE)" -F $(BUILD_DIR)/$(ASSET).CHANGELOG.md "$(ASSET).tar.gz#Release (tar.gz)" "$(ASSET).zip#Release (zip)"
-	make clean
 
 clean: ## Clean
 	test -d $(BUILD_DIR) || mkdir -p $(BUILD_DIR)
