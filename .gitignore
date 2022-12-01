@@ -1,2 +1,2 @@
-/release.tar.gz
-/release.zip
+/build/*.tar.gz
+/build/*.zip
