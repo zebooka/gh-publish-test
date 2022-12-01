@@ -19,7 +19,7 @@ help:
 publish: ## Publish new release to GitHub
 	git status --short
 	test -z "$$(git status --porcelain)" && exit $?
-	awk -v ver=$(RELEASE) '/^## / { if (p) { exit }; if ($2 == ver) { p=1; next } } p && NF' CHANGELOG.md > $(BUILD_DIR)/$(ASSET).CHANGELOG.md
+	awk -v ver=$(RELEASE) '/^## / { if (p) { exit }; if ($$2 == ver) { p=1; next } } p && NF' CHANGELOG.md > $(BUILD_DIR)/$(ASSET).CHANGELOG.md
 	tar -czvf $(BUILD_DIR)/$(ASSET).tar.gz -C src . -C .. Makefile
 	cd $(CURRENT_DIR)src && zip -r $(BUILD_DIR)/$(ASSET).zip . && cd $(CURRENT_DIR) && zip -r $(BUILD_DIR)/$(ASSET).zip Makefile
 	cd $(BUILD_DIR) && gh release create "$(RELEASE)" -F $(BUILD_DIR)/$(ASSET).CHANGELOG.md "$(ASSET).tar.gz#Release (tar.gz)" "$(ASSET).zip#Release (zip)"
